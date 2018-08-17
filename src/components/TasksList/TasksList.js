@@ -7,8 +7,8 @@ export const TasksList = () => {
 
   return (
     tasks.map((task) => {
-      return <TaskCard key={task.id} taskName={task.taskName} description={task.description} alertBefore={task.alertBefore}
-                       recurring={task.recurring}/>
+      return <TaskCard key={task.id} id={task.id} taskName={task.taskName} description={task.description} alertBefore={task.alertBefore}
+                       recurring={task.recurring} lastDone={task.lastDone}/>
     })
   )
 }
