@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { TaskCard } from './components/taskCard'
+import { TasksList } from './components/TasksList/TasksList'
+
 class App extends Component {
   render() {
+
     return (
       <div className="App">
         <header className="App-header">
@@ -11,8 +13,7 @@ class App extends Component {
           <h1 className="App-title">Welcome to React</h1>
         </header>
         <div className={'page-wrapper'}>
-            <TaskCard card/>
-            <TaskCard card/>
+           <TasksList tasks={this.tasks}/>
         </div>
       </div>
     );
