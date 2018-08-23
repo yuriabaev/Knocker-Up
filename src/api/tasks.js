@@ -18,5 +18,5 @@ export const updateTask = (updatedTask) => {
   return tasks[index] = updatedTask
 }
 export const getTaskById = (id) => {
-  return tasks.filter((task) => task.id === id)[0]
+  return taskStore.tasks.filter((task) => task.id === id)[0]
 }

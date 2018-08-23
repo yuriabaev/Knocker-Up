@@ -29,7 +29,7 @@ export class TaskCard extends Component {
               {`Alert ${alertBefore.number} ${alertBefore.period} before Due Date.`}
             </div>
             <div className={'footer-text'}>
-              {`Alert every: ${recurring.number} ${recurring.period}.`}
+              {`Do every: ${recurring.number} ${recurring.period}.`}
             </div>
             {lastDone
             &&
