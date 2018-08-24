@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './App.css'
 import TasksList from './components/TasksList/TasksList'
-import { taskStore } from './stores/tasks'
+import taskStore from './stores/tasks'
 
 class App extends Component {
   render () {
@@ -11,9 +11,9 @@ class App extends Component {
         <header className="App-header">
           <h1 className="App-title">Tasks List</h1>
         </header>
-          <div className={'page-wrapper'}>
-            <TasksList taskStore={taskStore}/>
-          </div>
+        <div className={'page-wrapper'}>
+          <TasksList taskStore={taskStore}/>
+        </div>
       </div>
     )
   }

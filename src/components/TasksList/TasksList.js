@@ -9,7 +9,11 @@ const TasksList = ({taskStore}) => {
     tasks.map((task) => {
       return <TaskCard key={task.id} id={task.id} taskName={task.taskName} description={task.description}
                        alertBefore={task.alertBefore}
-                       recurring={task.recurring} lastDone={task.lastDone}/>
+                       recurring={task.recurring}
+                       lastDone={task.lastDone}
+                       daysLeft={task.daysLeft}
+
+                       />
     })
   )
 }

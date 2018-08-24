@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import Card from '@material-ui/core/Card'
 import CardActions from '@material-ui/core/CardActions'
 import Button from '@material-ui/core/Button'
@@ -11,7 +11,7 @@ export class TaskCard extends Component {
   }
 
   render () {
-    const {taskName, description, alertBefore, recurring, lastDone} = this.props
+    const {taskName, description, alertBefore, recurring, lastDone, daysLeft} = this.props
     console.log('lastDone', lastDone)
     return (
       <Card className={'card'}>
@@ -34,9 +34,12 @@ export class TaskCard extends Component {
             {lastDone
             &&
             <div className={'footer-text'}>
-              Last Done: {lastDone.format('MMMM Do YYYY, h:mm:ss a')}
+              Last Done: {lastDone.format('DD/MM/YY, h:mm:ss')}
             </div>
             }
+            <div className={'footer-text'}>
+              {`Days left till due date: ${daysLeft}.`}
+            </div>
           </div>
         </div>
         <CardActions>
