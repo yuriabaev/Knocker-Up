@@ -11,9 +11,9 @@ class App extends Component {
         <header className="App-header">
           <h1 className="App-title">Tasks List</h1>
         </header>
-        <div className={'page-wrapper'}>
-          <TasksList taskStore={taskStore}/>
-        </div>
+          <div className={'page-wrapper'}>
+            <TasksList taskStore={taskStore}/>
+          </div>
       </div>
     )
   }
