@@ -2,6 +2,11 @@ import React, { Component } from 'react'
 import './App.css'
 import TasksList from './components/TasksList/TasksList'
 import taskStore from './stores/tasks'
+import { configure } from 'mobx';
+
+configure({
+  enforceActions: 'strict'
+});
 
 class App extends Component {
   render () {

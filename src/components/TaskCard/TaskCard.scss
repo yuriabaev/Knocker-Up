@@ -1,21 +1,30 @@
 .headline {
   font-size: large;
+
+}
+
+.btn {
+  :hover {
+    cursor: pointer;
+  }
 }
 
 .header {
   display: flex;
+  justify-content: space-between;
   margin-bottom: 10px;
-
 }
 
 .regular-text {
   font-size: 14px;
   color: black;
 }
+
 .footer-text {
   font-size: 12px;
   color: grey;
 }
+
 .body {
   display: flex;
   flex-direction: column;

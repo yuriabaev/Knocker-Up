@@ -6,7 +6,7 @@ import './TaskCard.css'
 import { markTaskDone } from '../../businessLogic/taskLogic'
 import { observer } from 'mobx-react'
 
-const TIME_FORMAT = 'DD/MM/YY h:mm:ss';
+const TIME_FORMAT = 'DD/MM/YY h:mm:ss'
 
 @observer
 export class TaskCard extends Component {
@@ -16,12 +16,17 @@ export class TaskCard extends Component {
 
   render () {
     const {taskName, description, notifyDuration, recurring, lastDone, dueDate} = this.props
-    console.log('lastDone', lastDone && lastDone.format(TIME_FORMAT),'dueDate',dueDate && dueDate.format(TIME_FORMAT))
+    console.log('lastDone', lastDone && lastDone.format(TIME_FORMAT), 'dueDate', dueDate && dueDate.format(TIME_FORMAT))
     return (
       <Card className={'card'}>
         <div className={'card-wrapper'}>
           <div className={'headline header'}>
-            {taskName.charAt(0).toUpperCase() + taskName.substr(1)}
+            <span>
+              {taskName.charAt(0).toUpperCase() + taskName.substr(1)}
+            </span>
+            <span className='btn'>
+              <i className='far fa-edit'/>
+            </span>
           </div>
           <div className={'body'}>
             <div className={'regular-text'}>
@@ -29,23 +34,26 @@ export class TaskCard extends Component {
             </div>
           </div>
           <div className={'footer'}>
-            {dueDate &&
-            <div className={'footer-text'}>
-              <i className="far fa-clock"/> {dueDate.format(TIME_FORMAT)}
-            </div>}
-            <div className={'footer-text'}>
-              <i className="fas fa-undo"/> {recurring.number} {recurring.time}
-            </div>
-
-            <div className={'footer-text'}>
-              <i class="fa fa-bell" />  {notifyDuration.number} {notifyDuration.time} before Due Date.
-            </div>
-
             {lastDone &&
             <div className={'footer-text'}>
-              <i class="fa fa-fast-backward"/> {lastDone.format(TIME_FORMAT)}
+              <i className='fa fa-fast-backward'/> {lastDone.format(TIME_FORMAT)}
             </div>
             }
+            <div className={'footer-text'}>
+              <i className='fas fa-undo'/> {recurring.number} {recurring.time}
+            </div>
+            {dueDate &&
+            <div className={'footer-text'}>
+              <i className='far fa-clock'/> {dueDate.format(TIME_FORMAT)}
+            </div>
+            }
+
+
+            <div className={'footer-text'}>
+              <i className='fa fa-bell'/> {notifyDuration.number} {notifyDuration.time} before Due Date.
+            </div>
+
+
 
           </div>
         </div>

@@ -1,27 +1,40 @@
 import moment from 'moment'
+import { observable, action } from 'mobx'
 
 const uuidv4 = require('uuid/v4')
 
-export const Task = (id, taskName, description, notifyDuration, recurring, lastDone, isActive) => {
-    return {
-    id: id || uuidv4(),
-    taskName,
-    description,
-    notifyDuration,
-    recurring,
-    lastDone: lastDone ? moment(lastDone) : undefined,
-    isActive: isActive || true,
+export class Task {
+  id;
+  taskName;
+  description;
+  notifyDuration;
+  recurring;
+  @observable
+  lastDone;
+  isActive;
 
+  constructor (id, taskName, description, notifyDuration, recurring, lastDone, isActive) {
+    this.id = id || uuidv4()
+    this.taskName = taskName
+    this.description = description
+    this.notifyDuration = notifyDuration
+    this.recurring = recurring
+    this.lastDone = lastDone ? moment(lastDone) : undefined
+    this.isActive = isActive || true
+  }
 
+  @action
+  markAsDone () {
+    this.lastDone = moment()
+    this.isActive = false
+  }
 
-    get daysLeft () {
-      return this.isActive
+  get daysLeft () {
+    return this.isActive
+  }
 
-    },
-    get dueDate(){
-    //  console.log('duedate',this.lastDone , this.lastDone && this.lastDone.add(recurring.number,recurring.time),this.lastDone && this.lastDone.add(recurring.number,recurring.time))
-      return this.lastDone && moment(this.lastDone).add(recurring.number,recurring.time)
-    }
+  get dueDate () {
+    return this.lastDone && moment(this.lastDone).add(this.recurring.number, this.recurring.time)
   }
 }
 
