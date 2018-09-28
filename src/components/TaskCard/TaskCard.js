@@ -4,15 +4,19 @@ import CardActions from '@material-ui/core/CardActions'
 import Button from '@material-ui/core/Button'
 import './TaskCard.css'
 import { markTaskDone } from '../../businessLogic/taskLogic'
+import { observer } from 'mobx-react'
 
+const TIME_FORMAT = 'DD/MM/YY h:mm:ss';
+
+@observer
 export class TaskCard extends Component {
   onClickDone = () => {
     markTaskDone(this.props.id)
   }
 
   render () {
-    const {taskName, description, alertBefore, recurring, lastDone, daysLeft} = this.props
-    console.log('lastDone', lastDone)
+    const {taskName, description, notifyDuration, recurring, lastDone, dueDate} = this.props
+    console.log('lastDone', lastDone && lastDone.format(TIME_FORMAT),'dueDate',dueDate && dueDate.format(TIME_FORMAT))
     return (
       <Card className={'card'}>
         <div className={'card-wrapper'}>
@@ -25,21 +29,24 @@ export class TaskCard extends Component {
             </div>
           </div>
           <div className={'footer'}>
+            {dueDate &&
             <div className={'footer-text'}>
-              {`Alert ${alertBefore.number} ${alertBefore.period} before Due Date.`}
+              <i className="far fa-clock"/> {dueDate.format(TIME_FORMAT)}
+            </div>}
+            <div className={'footer-text'}>
+              <i className="fas fa-undo"/> {recurring.number} {recurring.time}
             </div>
+
             <div className={'footer-text'}>
-              {`Do every: ${recurring.number} ${recurring.period}.`}
+              <i class="fa fa-bell" />  {notifyDuration.number} {notifyDuration.time} before Due Date.
             </div>
-            {lastDone
-            &&
+
+            {lastDone &&
             <div className={'footer-text'}>
-              Last Done: {lastDone.format('DD/MM/YY, h:mm:ss')}
+              <i class="fa fa-fast-backward"/> {lastDone.format(TIME_FORMAT)}
             </div>
             }
-            <div className={'footer-text'}>
-              {`Days left till due date: ${daysLeft}.`}
-            </div>
+
           </div>
         </div>
         <CardActions>

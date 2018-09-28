@@ -1,38 +1,39 @@
 import moment from 'moment'
-import { observable ,computed} from 'mobx'
+
 const uuidv4 = require('uuid/v4')
 
-
-export const Task = (id, taskName, description, alertBefore, recurring, lastDone, isActive) => {
-  //return observable({
-  return ({
+export const Task = (id, taskName, description, notifyDuration, recurring, lastDone, isActive) => {
+    return {
     id: id || uuidv4(),
     taskName,
     description,
-    alertBefore,
+    notifyDuration,
     recurring,
     lastDone: lastDone ? moment(lastDone) : undefined,
     isActive: isActive || true,
 
-    // @computed get daysLeft(){
-    //   return 'lll'
-    //
-    // },
-    // @computed get dueDate(){
-    //   return 'ddd'
-    // }
-  })
+
+
+    get daysLeft () {
+      return this.isActive
+
+    },
+    get dueDate(){
+    //  console.log('duedate',this.lastDone , this.lastDone && this.lastDone.add(recurring.number,recurring.time),this.lastDone && this.lastDone.add(recurring.number,recurring.time))
+      return this.lastDone && moment(this.lastDone).add(recurring.number,recurring.time)
+    }
+  }
 }
 
-export const Period = (number, period) => {
+export const Duration = (number, time) => {
   return {
-    number, period
+    number, time
   }
 }
 
 export const TIME = {
   DAYS: 'days',
   WEEKS: 'weeks',
-  MONTH: 'month',
+  MONTHS: 'months',
   YEARS: 'years'
 }
