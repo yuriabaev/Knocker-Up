@@ -1,5 +1,5 @@
 import moment from 'moment'
-import { observable, action } from 'mobx'
+import { observable, action, computed } from 'mobx'
 
 const uuidv4 = require('uuid/v4')
 
@@ -9,8 +9,9 @@ export class Task {
   description;
   notifyDuration;
   recurring;
-  @observable
+   @observable
   lastDone;
+   @observable
   isActive;
 
   constructor (id, taskName, description, notifyDuration, recurring, lastDone, isActive) {
