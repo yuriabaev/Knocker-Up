@@ -41,7 +41,7 @@ export class TaskCard extends Component {
 
   render () {
     const {taskName, description, notifyDuration, recurring, lastDone, dueDate, isInEditMode} = this.props
-    console.log('lastDone', this.state.transientTask)
+    console.log('this.state.transientTask', this.state.transientTask)
 
     return (
       <Card className={'card'}>

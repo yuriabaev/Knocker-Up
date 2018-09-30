@@ -9,10 +9,8 @@ export class Task {
   description;
   notifyDuration;
   recurring;
-   @observable
-  lastDone;
-   @observable
-  isActive;
+  @observable lastDone;
+  @observable isActive;
 
   constructor (id, taskName, description, notifyDuration, recurring, lastDone, isActive) {
     this.id = id || uuidv4()
@@ -30,10 +28,22 @@ export class Task {
     this.isActive = false
   }
 
+  @action
+  editTask (task) {
+    // TODO Object.assign
+    this.id = task.id
+    this.taskName = task.taskName
+    this.description = task.description
+    this.notifyDuration = task.notifyDuration
+    this.recurring = task.recurring
+    this.lastDone = task.lastDone
+    this.isActive = task.isActive
+  }
+
   get daysLeft () {
     return this.isActive
   }
-
+  @computed
   get dueDate () {
     return this.lastDone && moment(this.lastDone).add(this.recurring.number, this.recurring.time)
   }

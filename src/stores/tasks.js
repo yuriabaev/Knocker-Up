@@ -16,6 +16,7 @@ class ObservableTasksStore {
   @action
   markTaskAsDone = (id) => {
     const index = this.tasks.findIndex((_tsk) => _tsk.id === id)
+    console.log('markTaskAsDone',this.tasks[index])
     this.tasks[index].markAsDone()
   }
 
@@ -27,8 +28,7 @@ class ObservableTasksStore {
   @action
   editTask = (id, newTask) => {
     const index = this.tasks.findIndex((_tsk) => _tsk.id === id)
-    this.tasks[index] = newTask
-
+    this.tasks[index].editTask(newTask)
   }
 
   @action
