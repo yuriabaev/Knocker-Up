@@ -17,6 +17,8 @@ const TasksList = ({taskStore}) => {
                        lastDone={task.lastDone}
                        daysLeft={task.daysLeft}
                        dueDate={task.dueDate}
+                       isActive={task.isActive}
+                       isInEditMode={taskStore.idOfInViewMode === task.id}
       />
     })
   )

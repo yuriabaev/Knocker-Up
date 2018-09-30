@@ -46,6 +46,9 @@ export const Duration = (number, time) => {
 }
 
 export const TIME = {
+  SECONDS: 'seconds',
+  MINUTES: 'minutes',
+  HOURS: 'hours',
   DAYS: 'days',
   WEEKS: 'weeks',
   MONTHS: 'months',
