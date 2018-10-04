@@ -3,7 +3,7 @@ import Card from '@material-ui/core/Card'
 import CardActions from '@material-ui/core/CardActions'
 import Button from '@material-ui/core/Button'
 import './TaskCard.css'
-import { markTaskDone, onEditCard, onSaveCard } from '../../businessLogic/taskLogic'
+import { markTaskDone, onEditCardClick, onSaveCard,onEditCardTaskName } from '../../businessLogic/taskLogic'
 import { observer } from 'mobx-react'
 import { Task } from '../../businessLogic/types'
 import { capitalize } from '../../utils/StringUtils'
@@ -12,36 +12,26 @@ const TIME_FORMAT = 'DD/MM/YY h:mm:ss'
 
 @observer
 export class TaskCard extends Component {
-  constructor (props) {
-    super(props)
-    const {id, taskName, description, notifyDuration, recurring, lastDone, isActive} = this.props
-    this.state = {transientTask: new Task(id, taskName, description, notifyDuration, recurring, lastDone, isActive)}
-  }
 
   onClickDone = () => {
     markTaskDone(this.props.id)
   }
 
   onClickEdit = () => {
-    onEditCard(this.props.id)
+    onEditCardClick(this.props.id)
   }
 
   onClickSave = () => {
-    onSaveCard(this.props.id, this.state.transientTask)
+    onSaveCard(this.props.id)
   }
 
   onChangeTitle = (event) => {
-    this.setState({
-      transientTask: {
-        ...this.state.transientTask,
-        taskName: String(event.target.value).toLowerCase()
-      }
-    })
+    onEditCardTaskName(String(event.target.value).toLowerCase())
   }
 
   render () {
-    const {taskName, description, notifyDuration, recurring, lastDone, dueDate, isInEditMode} = this.props
-    console.log('this.state.transientTask', this.state.transientTask)
+    const {taskName, description, notifyDuration, recurring, lastDone, dueDate, isInEditMode,transientTask} = this.props
+    //console.log('this.state.transientTask', this.props.transientTask)
 
     return (
       <Card className={'card'}>
@@ -49,8 +39,7 @@ export class TaskCard extends Component {
           <div className={'headline header'}>
             {
               isInEditMode ?
-                <input className={'headline'} value={capitalize(this.state.transientTask.taskName)}
-                       onChange={this.onChangeTitle}/>
+                <input className={'headline'} value={capitalize(taskName)} placeholder={'Title'} onChange={this.onChangeTitle}/>
                 :
                 <Fragment>
                   <span>

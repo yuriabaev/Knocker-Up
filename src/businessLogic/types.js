@@ -5,7 +5,7 @@ const uuidv4 = require('uuid/v4')
 
 export class Task {
   id;
-  taskName;
+  @observable taskName;
   description;
   notifyDuration;
   recurring;
@@ -13,6 +13,15 @@ export class Task {
   @observable isActive;
 
   constructor (id, taskName, description, notifyDuration, recurring, lastDone, isActive) {
+    if(id instanceof Task){
+      this.init(id)
+      return
+    }
+
+    this.init({id, taskName, description, notifyDuration, recurring, lastDone, isActive})
+  }
+
+  init ({id, taskName, description, notifyDuration, recurring, lastDone, isActive}) {
     this.id = id || uuidv4()
     this.taskName = taskName
     this.description = description
@@ -29,15 +38,14 @@ export class Task {
   }
 
   @action
+  markAsDone () {
+    this.lastDone = moment()
+    this.isActive = false
+  }
+
+  @action
   editTask (task) {
-    // TODO Object.assign
-    this.id = task.id
-    this.taskName = task.taskName
-    this.description = task.description
-    this.notifyDuration = task.notifyDuration
-    this.recurring = task.recurring
-    this.lastDone = task.lastDone
-    this.isActive = task.isActive
+    this.init(task)
   }
 
   get daysLeft () {
@@ -46,6 +54,10 @@ export class Task {
   @computed
   get dueDate () {
     return this.lastDone && moment(this.lastDone).add(this.recurring.number, this.recurring.time)
+  }
+  @action
+  setTaskName(taskName){
+    this.taskName = String(taskName).toLowerCase()
   }
 }
 

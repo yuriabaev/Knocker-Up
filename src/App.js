@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import './App.css'
 import TasksList from './components/TasksList/TasksList'
 import taskStore from './stores/tasks'
+import applicationStore from './stores/application'
 //import { configure } from 'mobx';
 
 // configure({
@@ -16,7 +17,7 @@ class App extends Component {
           <h1 className="App-title">Tasks List</h1>
         </header>
         <div className={'page-wrapper'}>
-          <TasksList taskStore={taskStore}/>
+          <TasksList taskStore={taskStore} applicationStore={applicationStore}/>
         </div>
       </div>
     )
