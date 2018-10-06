@@ -17,3 +17,7 @@ export const onSaveCard = () => {
 export const onEditCardTaskName = (taskName) => {
   applicationStore.onEditCardTaskName(taskName)
 }
+
+export const onSelectedRecurringTimeChange = (time) => {
+  applicationStore.onRecurringTimeChange(time)
+}

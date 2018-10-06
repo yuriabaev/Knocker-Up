@@ -8,7 +8,7 @@ export class Task {
   @observable taskName;
   description;
   notifyDuration;
-  recurring;
+  @observable recurring;
   @observable lastDone;
   @observable isActive;
 
@@ -58,6 +58,10 @@ export class Task {
   @action
   setTaskName(taskName){
     this.taskName = String(taskName).toLowerCase()
+  }
+  @action
+  setRecurringTime(time){
+    this.recurring.time = time
   }
 }
 

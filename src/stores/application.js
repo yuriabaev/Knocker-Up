@@ -23,6 +23,10 @@ class AppStore {
   onEditCardTaskName = (taskName) => {
     this.transientTask.setTaskName(taskName)
   }
+  @action
+  onRecurringTimeChange = (time) => {
+    this.transientTask.setRecurringTime(time)
+  }
 
 }
 
