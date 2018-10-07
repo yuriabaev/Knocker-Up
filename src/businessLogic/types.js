@@ -63,6 +63,10 @@ export class Task {
   setRecurringTime(time){
     this.recurring.time = time
   }
+  @action
+  setRecurringTimeNumber(number){
+    this.recurring.number = number
+  }
 }
 
 export const Duration = (number, time) => {

@@ -21,3 +21,6 @@ export const onEditCardTaskName = (taskName) => {
 export const onSelectedRecurringTimeChange = (time) => {
   applicationStore.onRecurringTimeChange(time)
 }
+export const onRecurringNumberChange = (number) => {
+  applicationStore.onRecurringNumberChange(number)
+}

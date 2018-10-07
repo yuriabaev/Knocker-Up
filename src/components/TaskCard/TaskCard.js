@@ -3,12 +3,19 @@ import Card from '@material-ui/core/Card'
 import CardActions from '@material-ui/core/CardActions'
 import Button from '@material-ui/core/Button'
 import './TaskCard.css'
-import { markTaskDone, onEditCardClick, onSaveCard, onEditCardTaskName ,onSelectedRecurringTimeChange} from '../../businessLogic/taskLogic'
+import {
+  markTaskDone,
+  onEditCardClick,
+  onSaveCard,
+  onEditCardTaskName,
+  onSelectedRecurringTimeChange, onRecurringNumberChange
+} from '../../businessLogic/taskLogic'
 import { observer } from 'mobx-react'
-import { Task, TIME } from '../../businessLogic/types'
+import { TIME } from '../../businessLogic/types'
 import { capitalize } from '../../utils/StringUtils'
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
+import TextField from '@material-ui/core/TextField'
 
 const TIME_FORMAT = 'DD/MM/YY h:mm:ss a'
 
@@ -32,6 +39,10 @@ export class TaskCard extends Component {
   }
   onSelectedRecurringTimeChange = (event) => {
     onSelectedRecurringTimeChange(event.target.value)
+  }
+  onRecurringNumberChange = (event) => {
+    console.log('onRecurringNumberChange', event.target.value)
+     onRecurringNumberChange(event.target.value)
   }
 
   render () {
@@ -68,19 +79,37 @@ export class TaskCard extends Component {
             </div>
             }
             <div className={'footer-text'}>
-              <i className='fas fa-undo'/> <span className={'recurring-number'}>{recurring.number}</span>
+              <i className='fas fa-undo'/>
               {isInEditMode ?
-                <Select
-                  displayEmpty
-                  value={recurring.time}
-                  // inputProps={{value:'ddd'}}
-                  onChange={this.onSelectedRecurringTimeChange}>
-                  {Object.keys(TIME).map((time_type_key) => {
-                    return <MenuItem key={time_type_key} value={TIME[time_type_key]}>{TIME[time_type_key]}</MenuItem>
-                  })}
-                </Select>
+                <Fragment>
+                  <TextField
+                    value={recurring.number}
+                    onChange={this.onRecurringNumberChange}
+                    type="number"
+                    className={'footer-text'}
+                    // InputLabelProps={{
+                    //   shrink: true,
+                    // }}
+                    //margin="normal"
+                  />
+                  <Select
+                    displayEmpty
+                    value={recurring.time}
+                    variant={'standard'}
+                    classes={{
+                      root: 'footer-text'
+                    }}
+                    onChange={this.onSelectedRecurringTimeChange}>
+                    {Object.keys(TIME).map((time_type_key) => {
+                      return <MenuItem key={time_type_key} value={TIME[time_type_key]}>{TIME[time_type_key]}</MenuItem>
+                    })}
+                  </Select>
+                </Fragment>
                 :
-                recurring.time
+
+                <Fragment>
+                  <span className={'recurring-number'}>{recurring.number}</span> {recurring.time}
+                </Fragment>
               }
 
             </div>

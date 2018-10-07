@@ -28,6 +28,11 @@ class AppStore {
     this.transientTask.setRecurringTime(time)
   }
 
+  @action
+  onRecurringNumberChange = (number) => {
+    this.transientTask.setRecurringTimeNumber(number)
+  }
+
 }
 
 const applicationStore = window.applicationStore = new AppStore()
