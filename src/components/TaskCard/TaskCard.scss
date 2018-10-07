@@ -1,4 +1,5 @@
 $text-color: grey;
+$text-size: 12px;
 
 .headline {
   font-size: large;
@@ -23,7 +24,7 @@ $text-color: grey;
 }
 
 .footer-text {
-  font-size: 12px;
+  font-size: $text-size;
   color: $text-color;
 }
 
@@ -45,8 +46,12 @@ $text-color: grey;
   display: flex;
   flex-direction: column;
 }
-.recurring-number {
+
+
+.number-input {
+  width:40px;
+  color:$text-color !important ;
+  font-size: 12px !important;
   margin-right: 5px;
   margin-left: 5px;
-
 }
