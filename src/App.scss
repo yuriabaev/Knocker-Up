@@ -17,9 +17,10 @@
   background-color: #2196f3;
   padding: 5px;
   color: white;
-  box-shadow: 0 4px 5px 0 rgba(0,0,0,0.14), 0 1px 10px 0 rgba(0,0,0,0.12), 0 2px 4px -1px rgba(0,0,0,0.2);
-  position: sticky;
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+  position: fixed;
   top: 0;
+  width: 100%;
   z-index: 999;
 }
 
@@ -46,7 +47,17 @@
   width: 100%;
 }
 
+.add-btn {
+  position: fixed !important;
+  right: 20px;
+  bottom: 20px;
+}
+
 @keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
