@@ -24,13 +24,13 @@ class AppStore {
     this.transientTask.setTaskName(taskName)
   }
   @action
-  onRecurringTimeChange = (time) => {
-    this.transientTask.setRecurringTime(time)
+  onRecurringTimeChange = (duration) => {
+    this.transientTask.setRecurringDuration(duration)
   }
 
   @action
-  onRecurringNumberChange = (number) => {
-    this.transientTask.setRecurringTimeNumber(number)
+  onAlertTimeChange = (duration) => {
+    this.transientTask.setAlertDuration(duration)
   }
 
 }

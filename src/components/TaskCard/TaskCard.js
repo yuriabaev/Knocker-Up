@@ -8,14 +8,11 @@ import {
   onEditCardClick,
   onSaveCard,
   onEditCardTaskName,
-  onSelectedRecurringTimeChange, onRecurringNumberChange
+  onSelectedRecurringTimeChange, onRecurringNumberChange, onAlertChange
 } from '../../businessLogic/taskLogic'
 import { observer } from 'mobx-react'
-import { TIME } from '../../businessLogic/types'
 import { capitalize } from '../../utils/StringUtils'
-import Select from '@material-ui/core/Select'
-import MenuItem from '@material-ui/core/MenuItem'
-import TextField from '@material-ui/core/TextField'
+import { PeriodPicker } from './components/PeriodPicker'
 
 const TIME_FORMAT = 'DD/MM/YY h:mm:ss a'
 
@@ -37,17 +34,20 @@ export class TaskCard extends Component {
   onChangeTitle = (event) => {
     onEditCardTaskName(String(event.target.value).toLowerCase())
   }
-  onSelectedRecurringTimeChange = (event) => {
-    onSelectedRecurringTimeChange(event.target.value)
+  onRecurringChange = (duration) => {
+    onSelectedRecurringTimeChange(duration)
   }
-  onRecurringNumberChange = (event) => {
-    console.log('onRecurringNumberChange', event.target.value)
-     onRecurringNumberChange(event.target.value)
+
+
+  onAlertChange = (duration) => {
+    onAlertChange(duration)
   }
 
   render () {
-    const {taskName, description, notifyDuration, recurring, lastDone, dueDate, isInEditMode} = this.props
-
+    const {taskName, description, notifyDuration, recurringDuration, lastDone, dueDate, isInEditMode} = this.props
+  console.log('notifyDuration',taskName,notifyDuration.number)
+  console.log('recurringDuration',taskName, recurringDuration.number)
+    
     return (
       <Card className={'card'}>
         <div className={'card-wrapper'}>
@@ -80,38 +80,10 @@ export class TaskCard extends Component {
             }
             <div className={'footer-text'}>
               <i className='fas fa-undo'/>
-              {isInEditMode ?
-                <Fragment>
-                  <TextField
-                    value={recurring.number}
-                    onChange={this.onRecurringNumberChange}
-                    type="number"
-                    className={'footer-text'}
-                    // InputLabelProps={{
-                    //   shrink: true,
-                    // }}
-                    //margin="normal"
-                  />
-                  <Select
-                    displayEmpty
-                    value={recurring.time}
-                    variant={'standard'}
-                    classes={{
-                      root: 'footer-text'
-                    }}
-                    onChange={this.onSelectedRecurringTimeChange}>
-                    {Object.keys(TIME).map((time_type_key) => {
-                      return <MenuItem key={time_type_key} value={TIME[time_type_key]}>{TIME[time_type_key]}</MenuItem>
-                    })}
-                  </Select>
-                </Fragment>
-                :
-
-                <Fragment>
-                  <span className={'recurring-number'}>{recurring.number}</span> {recurring.time}
-                </Fragment>
-              }
-
+              <PeriodPicker isInEditMode={isInEditMode}
+                            number={recurringDuration.number}
+                            time={recurringDuration.time}
+                            onChange={this.onRecurringChange}/>
             </div>
             {dueDate &&
             <div className={'footer-text'}>
@@ -121,7 +93,16 @@ export class TaskCard extends Component {
 
 
             <div className={'footer-text'}>
-              <i className='fa fa-bell'/> {notifyDuration.number} {notifyDuration.time} before Due Date.
+              <i className='fa fa-bell'/>
+              
+              <PeriodPicker isInEditMode={isInEditMode}
+                            number={notifyDuration.number}
+                            time={notifyDuration.time}
+                            onChange={this.onAlertChange}/>
+
+              <span>
+                before Due Date.
+              </span>
             </div>
 
 

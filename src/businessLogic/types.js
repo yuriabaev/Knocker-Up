@@ -7,7 +7,7 @@ export class Task {
   id;
   @observable taskName;
   description;
-  notifyDuration;
+  @observable notifyDuration;
   @observable recurring;
   @observable lastDone;
   @observable isActive;
@@ -20,7 +20,7 @@ export class Task {
 
     this.init({id, taskName, description, notifyDuration, recurring, lastDone, isActive})
   }
-
+  @action
   init ({id, taskName, description, notifyDuration, recurring, lastDone, isActive}) {
     this.id = id || uuidv4()
     this.taskName = taskName
@@ -60,12 +60,13 @@ export class Task {
     this.taskName = String(taskName).toLowerCase()
   }
   @action
-  setRecurringTime(time){
-    this.recurring.time = time
+  setRecurringDuration(duration){
+    this.recurring = duration
   }
+
   @action
-  setRecurringTimeNumber(number){
-    this.recurring.number = number
+  setAlertDuration(duration){
+    this.notifyDuration = duration
   }
 }
 

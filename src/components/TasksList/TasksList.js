@@ -17,7 +17,7 @@ const TasksList = ({taskStore,applicationStore}) => {
                        taskName={task.taskName}
                        description={task.description}
                        notifyDuration={task.notifyDuration}
-                       recurring={task.recurring}
+                       recurringDuration={task.recurring}
                        lastDone={task.lastDone}
                        daysLeft={task.daysLeft}
                        dueDate={task.dueDate}
