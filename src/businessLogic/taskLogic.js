@@ -22,6 +22,9 @@ export const onAddNewCard = () => {
 export const onEditCardTaskName = (taskName) => {
   applicationStore.onEditCardTaskName(taskName)
 }
+export const onTaskDescriptionChange = (description) => {
+  applicationStore.onTaskDescriptionChange(description)
+}
 
 export const onSelectedRecurringTimeChange = (duration) => {
   applicationStore.onRecurringTimeChange(duration)
@@ -30,3 +33,4 @@ export const onSelectedRecurringTimeChange = (duration) => {
 export const onAlertChange = (duration) => {
   applicationStore.onAlertTimeChange(duration)
 }
+

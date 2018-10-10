@@ -6,13 +6,14 @@ import './TaskCard.css'
 import {
   markTaskDone,
   onEditCardClick,
-  onSaveCard,
   onEditCardTaskName,
-  onSelectedRecurringTimeChange, onRecurringNumberChange, onAlertChange
+  onSelectedRecurringTimeChange, onAlertChange,
+  onTaskDescriptionChange
 } from '../../businessLogic/taskLogic'
 import { observer } from 'mobx-react'
 import { capitalize } from '../../utils/StringUtils'
 import { PeriodPicker } from './components/PeriodPicker'
+import TextareaAutosize from 'react-autosize-textarea'
 
 const TIME_FORMAT = 'DD/MM/YY h:mm:ss a'
 
@@ -33,6 +34,10 @@ export class TaskCard extends Component {
 
   onChangeTitle = (event) => {
     onEditCardTaskName(String(event.target.value).toLowerCase())
+  }
+
+  onDescriptionChange = (event) => {
+    onTaskDescriptionChange(event.target.value)
   }
   onRecurringChange = (duration) => {
     onSelectedRecurringTimeChange(duration)
@@ -65,9 +70,8 @@ export class TaskCard extends Component {
             }
           </div>
           <div className={'body'}>
-            <div className={'regular-text'}>
-              {description}
-            </div>
+            <TextareaAutosize className={'description-text-area regular-text'} placeholder='Description' wrap='hard'
+                              onChange={this.onDescriptionChange} disabled={!isInEditMode} value={description}/>
           </div>
           <div className={'footer'}>
             {lastDone &&

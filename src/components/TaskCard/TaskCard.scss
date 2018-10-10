@@ -4,6 +4,7 @@ $text-size: 12px;
 .headline {
   font-size: large;
   border:none;
+  outline: none;
 }
 
 .btn {
@@ -33,8 +34,6 @@ $text-size: 12px;
   flex-direction: column;
   align-items: flex-start;
   margin-bottom: 20px;
-  margin-left: 10px;
-
 }
 
 .footer {
@@ -54,4 +53,11 @@ $text-size: 12px;
   font-size: 12px !important;
   margin-right: 5px;
   margin-left: 5px;
+}
+
+.description-text-area {
+  width: 100%;
+  border: none;
+  resize: none;
+  outline: none;
 }

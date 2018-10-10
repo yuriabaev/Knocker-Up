@@ -7,7 +7,7 @@ const uuidv4 = require('uuid/v4')
 export class Task {
   id;
   @observable taskName;
-  description;
+  @observable description;
   @observable notifyDuration;
   @observable recurring;
   @observable lastDone;
@@ -59,6 +59,10 @@ export class Task {
   @action
   setTaskName(taskName){
     this.taskName = String(taskName).toLowerCase()
+  }
+  @action
+  setDescription(description){
+    this.description = description
   }
   @action
   setRecurringDuration(duration){

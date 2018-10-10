@@ -33,6 +33,10 @@ class AppStore {
     this.transientTask.setTaskName(taskName)
   }
   @action
+  onTaskDescriptionChange = (description) => {
+    this.transientTask.setDescription(description)
+  }
+  @action
   onRecurringTimeChange = (duration) => {
     this.transientTask.setRecurringDuration(duration)
   }
@@ -42,7 +46,7 @@ class AppStore {
     this.transientTask.setAlertDuration(duration)
   }
 
-   isInCreateMode=()=> {return this.viewMode === VIEW_MODES.CREATE}
+  isInCreateMode = () => {return this.viewMode === VIEW_MODES.CREATE}
 
 }
 
