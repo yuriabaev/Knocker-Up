@@ -3,12 +3,19 @@ import Card from '@material-ui/core/Card'
 import CardActions from '@material-ui/core/CardActions'
 import Button from '@material-ui/core/Button'
 import './TaskCard.css'
-import { markTaskDone, onEditCardClick, onSaveCard,onEditCardTaskName } from '../../businessLogic/taskLogic'
+import {
+  markTaskDone,
+  onEditCardClick,
+  onEditCardTaskName,
+  onSelectedRecurringTimeChange, onAlertChange,
+  onTaskDescriptionChange
+} from '../../businessLogic/taskLogic'
 import { observer } from 'mobx-react'
-import { Task } from '../../businessLogic/types'
 import { capitalize } from '../../utils/StringUtils'
+import { PeriodPicker } from './components/PeriodPicker'
+import TextareaAutosize from 'react-autosize-textarea'
 
-const TIME_FORMAT = 'DD/MM/YY h:mm:ss'
+const TIME_FORMAT = 'DD/MM/YY h:mm:ss a'
 
 @observer
 export class TaskCard extends Component {
@@ -22,16 +29,26 @@ export class TaskCard extends Component {
   }
 
   onClickSave = () => {
-    onSaveCard(this.props.id)
+    this.props.onSaveCard(this.props.id)
   }
 
   onChangeTitle = (event) => {
     onEditCardTaskName(String(event.target.value).toLowerCase())
   }
 
+  onDescriptionChange = (event) => {
+    onTaskDescriptionChange(event.target.value)
+  }
+  onRecurringChange = (duration) => {
+    onSelectedRecurringTimeChange(duration)
+  }
+
+  onAlertChange = (duration) => {
+    onAlertChange(duration)
+  }
+
   render () {
-    const {taskName, description, notifyDuration, recurring, lastDone, dueDate, isInEditMode,transientTask} = this.props
-    //console.log('this.state.transientTask', this.props.transientTask)
+    const {taskName, description, notifyDuration, recurringDuration, lastDone, dueDate, isInEditMode} = this.props
 
     return (
       <Card className={'card'}>
@@ -39,7 +56,8 @@ export class TaskCard extends Component {
           <div className={'headline header'}>
             {
               isInEditMode ?
-                <input className={'headline'} value={capitalize(taskName)} placeholder={'Title'} onChange={this.onChangeTitle}/>
+                <input className={'headline'} value={capitalize(taskName)} placeholder={'Title'}
+                       onChange={this.onChangeTitle}/>
                 :
                 <Fragment>
                   <span>
@@ -52,9 +70,8 @@ export class TaskCard extends Component {
             }
           </div>
           <div className={'body'}>
-            <div className={'regular-text'}>
-              {description}
-            </div>
+            <TextareaAutosize className={'description-text-area regular-text'} placeholder='Description' wrap='hard'
+                              onChange={this.onDescriptionChange} disabled={!isInEditMode} value={description}/>
           </div>
           <div className={'footer'}>
             {lastDone &&
@@ -62,19 +79,36 @@ export class TaskCard extends Component {
               <i className='fa fa-fast-backward'/> {lastDone.format(TIME_FORMAT)}
             </div>
             }
+            {recurringDuration &&
             <div className={'footer-text'}>
-              <i className='fas fa-undo'/> {recurring.number} {recurring.time}
+              <i className='fas fa-undo'/>
+              <PeriodPicker isInEditMode={isInEditMode}
+                            number={recurringDuration.number}
+                            time={recurringDuration.time}
+                            onChange={this.onRecurringChange}/>
             </div>
+            }
+
             {dueDate &&
             <div className={'footer-text'}>
               <i className='far fa-clock'/> {dueDate.format(TIME_FORMAT)}
             </div>
             }
 
-
+            {notifyDuration &&
             <div className={'footer-text'}>
-              <i className='fa fa-bell'/> {notifyDuration.number} {notifyDuration.time} before Due Date.
+              <i className='fa fa-bell'/>
+
+              <PeriodPicker isInEditMode={isInEditMode}
+                            number={notifyDuration.number}
+                            time={notifyDuration.time}
+                            onChange={this.onAlertChange}/>
+
+              <span>
+                before Due Date.
+              </span>
             </div>
+            }
 
 
           </div>

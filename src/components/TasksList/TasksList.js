@@ -1,6 +1,10 @@
 import React from 'react'
 import { TaskCard } from '../TaskCard/TaskCard'
 import { observer } from 'mobx-react'
+import {
+  onSaveCard,
+} from '../../businessLogic/taskLogic'
+
 
 const TasksList = ({taskStore,applicationStore}) => {
   const tasks = taskStore.tasks
@@ -17,12 +21,13 @@ const TasksList = ({taskStore,applicationStore}) => {
                        taskName={task.taskName}
                        description={task.description}
                        notifyDuration={task.notifyDuration}
-                       recurring={task.recurring}
+                       recurringDuration={task.recurring}
                        lastDone={task.lastDone}
                        daysLeft={task.daysLeft}
                        dueDate={task.dueDate}
                        isActive={task.isActive}
                        isInEditMode={isEditMode}
+                       onSaveCard={onSaveCard}
 
       />
     })

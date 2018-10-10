@@ -13,7 +13,24 @@ export const onSaveCard = () => {
   tasksStore.saveEditedTask(editedTask)
   applicationStore.goToViewMode()
 }
+export const onAddNewCard = () => {
+  const newTask  = applicationStore.transientTask;
+  tasksStore.addNewTask(newTask)
+  applicationStore.goToViewMode()
+}
 
 export const onEditCardTaskName = (taskName) => {
   applicationStore.onEditCardTaskName(taskName)
 }
+export const onTaskDescriptionChange = (description) => {
+  applicationStore.onTaskDescriptionChange(description)
+}
+
+export const onSelectedRecurringTimeChange = (duration) => {
+  applicationStore.onRecurringTimeChange(duration)
+}
+
+export const onAlertChange = (duration) => {
+  applicationStore.onAlertTimeChange(duration)
+}
+

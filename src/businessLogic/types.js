@@ -1,14 +1,15 @@
 import moment from 'moment'
 import { observable, action, computed } from 'mobx'
+import TasksList from '../components/TasksList/TasksList'
 
 const uuidv4 = require('uuid/v4')
 
 export class Task {
   id;
   @observable taskName;
-  description;
-  notifyDuration;
-  recurring;
+  @observable description;
+  @observable notifyDuration;
+  @observable recurring;
   @observable lastDone;
   @observable isActive;
 
@@ -20,13 +21,13 @@ export class Task {
 
     this.init({id, taskName, description, notifyDuration, recurring, lastDone, isActive})
   }
-
+  @action
   init ({id, taskName, description, notifyDuration, recurring, lastDone, isActive}) {
     this.id = id || uuidv4()
-    this.taskName = taskName
-    this.description = description
-    this.notifyDuration = notifyDuration
-    this.recurring = recurring
+    this.taskName = taskName || ''
+    this.description = description || ''
+    this.notifyDuration = notifyDuration || Duration(1,TIME.WEEKS)
+    this.recurring = recurring || Duration(1,TIME.MONTHS)
     this.lastDone = lastDone ? moment(lastDone) : undefined
     this.isActive = isActive || true
   }
@@ -58,6 +59,19 @@ export class Task {
   @action
   setTaskName(taskName){
     this.taskName = String(taskName).toLowerCase()
+  }
+  @action
+  setDescription(description){
+    this.description = description
+  }
+  @action
+  setRecurringDuration(duration){
+    this.recurring = duration
+  }
+
+  @action
+  setAlertDuration(duration){
+    this.notifyDuration = duration
   }
 }
 

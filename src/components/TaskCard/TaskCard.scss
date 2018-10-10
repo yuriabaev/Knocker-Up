@@ -1,6 +1,10 @@
+$text-color: grey;
+$text-size: 12px;
+
 .headline {
   font-size: large;
   border:none;
+  outline: none;
 }
 
 .btn {
@@ -21,8 +25,8 @@
 }
 
 .footer-text {
-  font-size: 12px;
-  color: grey;
+  font-size: $text-size;
+  color: $text-color;
 }
 
 .body {
@@ -30,8 +34,6 @@
   flex-direction: column;
   align-items: flex-start;
   margin-bottom: 20px;
-  margin-left: 10px;
-
 }
 
 .footer {
@@ -42,4 +44,20 @@
   padding: 20px;
   display: flex;
   flex-direction: column;
+}
+
+
+.number-input {
+  width:40px;
+  color:$text-color !important ;
+  font-size: 12px !important;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+.description-text-area {
+  width: 100%;
+  border: none;
+  resize: none;
+  outline: none;
 }
