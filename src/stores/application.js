@@ -1,13 +1,16 @@
-import { observable, action } from 'mobx'
+import { observable, action, computed } from 'mobx'
 import taskStore from './tasks'
 import { Task } from '../businessLogic/types'
 
 class AppStore {
   @observable
-  viewMode = 'view'
+  viewMode = VIEW_MODES.VIEW
 
   @observable
   transientTask
+
+  @observable
+  newAddedTask
 
   @action
   goToEditMode = (id) => {
@@ -17,7 +20,13 @@ class AppStore {
 
   @action
   goToViewMode = () => {
+    this.viewMode = VIEW_MODES.VIEW
     this.transientTask = undefined
+  }
+  @action
+  goToCreateMode = () => {
+    this.transientTask = new Task()
+    this.viewMode = VIEW_MODES.CREATE
   }
   @action
   onEditCardTaskName = (taskName) => {
@@ -33,6 +42,14 @@ class AppStore {
     this.transientTask.setAlertDuration(duration)
   }
 
+   isInCreateMode=()=> {return this.viewMode === VIEW_MODES.CREATE}
+
+}
+
+export const VIEW_MODES = {
+  CREATE: 'create',
+  VIEW: 'view',
+  EDIT: 'edit'
 }
 
 const applicationStore = window.applicationStore = new AppStore()

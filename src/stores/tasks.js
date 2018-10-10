@@ -34,6 +34,11 @@ class ObservableTasksStore {
     this.tasks[index].editTask(editedTask)
   }
 
+  @action
+  addNewTask = (newTask) => {
+    this.tasks.unshift(newTask)
+  }
+
 
   @action
   goToViewMode = () => {

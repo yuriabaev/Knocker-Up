@@ -28,7 +28,7 @@ export class TaskCard extends Component {
   }
 
   onClickSave = () => {
-    onSaveCard(this.props.id)
+    this.props.onSaveCard(this.props.id)
   }
 
   onChangeTitle = (event) => {
@@ -38,16 +38,13 @@ export class TaskCard extends Component {
     onSelectedRecurringTimeChange(duration)
   }
 
-
   onAlertChange = (duration) => {
     onAlertChange(duration)
   }
 
   render () {
     const {taskName, description, notifyDuration, recurringDuration, lastDone, dueDate, isInEditMode} = this.props
-  console.log('notifyDuration',taskName,notifyDuration.number)
-  console.log('recurringDuration',taskName, recurringDuration.number)
-    
+
     return (
       <Card className={'card'}>
         <div className={'card-wrapper'}>
@@ -78,6 +75,7 @@ export class TaskCard extends Component {
               <i className='fa fa-fast-backward'/> {lastDone.format(TIME_FORMAT)}
             </div>
             }
+            {recurringDuration &&
             <div className={'footer-text'}>
               <i className='fas fa-undo'/>
               <PeriodPicker isInEditMode={isInEditMode}
@@ -85,16 +83,18 @@ export class TaskCard extends Component {
                             time={recurringDuration.time}
                             onChange={this.onRecurringChange}/>
             </div>
+            }
+
             {dueDate &&
             <div className={'footer-text'}>
               <i className='far fa-clock'/> {dueDate.format(TIME_FORMAT)}
             </div>
             }
 
-
+            {notifyDuration &&
             <div className={'footer-text'}>
               <i className='fa fa-bell'/>
-              
+
               <PeriodPicker isInEditMode={isInEditMode}
                             number={notifyDuration.number}
                             time={notifyDuration.time}
@@ -104,6 +104,7 @@ export class TaskCard extends Component {
                 before Due Date.
               </span>
             </div>
+            }
 
 
           </div>
