@@ -33,4 +33,7 @@ export const onSelectedRecurringTimeChange = (duration) => {
 export const onAlertChange = (duration) => {
   applicationStore.onAlertTimeChange(duration)
 }
+export const onClickDelete = (taskId) => {
+  tasksStore.deleteTask(taskId)
+}
 

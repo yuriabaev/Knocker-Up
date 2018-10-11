@@ -45,6 +45,12 @@ $text-size: 12px;
   display: flex;
   flex-direction: column;
 }
+.action-btns{
+  display: flex;
+  > span:not(:first-child){
+    margin-left: 7px;
+  }
+}
 
 
 .number-input {

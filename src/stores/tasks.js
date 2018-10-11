@@ -19,7 +19,6 @@ class ObservableTasksStore {
   @action
   markTaskAsDone = (id) => {
     const index = this.tasks.findIndex((_tsk) => _tsk.id === id)
-    console.log('markTaskAsDone',this.tasks[index])
     this.tasks[index].markAsDone()
   }
 
@@ -39,12 +38,22 @@ class ObservableTasksStore {
     this.tasks.unshift(newTask)
   }
 
-
   @action
   goToViewMode = () => {
     this.idOfInViewMode = undefined
   }
-}
 
-const taskStore = window.store = new ObservableTasksStore()
-export default taskStore
+
+  @action
+  deleteTask = (taskId) => {
+    const index = this.tasks.findIndex((_tsk) => _tsk.id === taskId)
+    console.log('this.tasks1',this.tasks)
+
+    if (index !== -1) {
+      this.tasks.splice(index, 1)
+      console.log('this.tasks2',this.tasks)
+    }
+  }
+}
+const taskStore = window.store = new ObservableTasksStore();
+export default taskStore;
