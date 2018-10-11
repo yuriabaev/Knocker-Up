@@ -8,7 +8,8 @@ import {
   onEditCardClick,
   onEditCardTaskName,
   onSelectedRecurringTimeChange, onAlertChange,
-  onTaskDescriptionChange
+  onTaskDescriptionChange,
+  onClickDelete
 } from '../../businessLogic/taskLogic'
 import { observer } from 'mobx-react'
 import { capitalize } from '../../utils/StringUtils'
@@ -46,6 +47,9 @@ export class TaskCard extends Component {
   onAlertChange = (duration) => {
     onAlertChange(duration)
   }
+  onClickDelete = () => {
+    onClickDelete(this.props.id)
+  }
 
   render () {
     const {taskName, description, notifyDuration, recurringDuration, lastDone, dueDate, isInEditMode} = this.props
@@ -63,9 +67,16 @@ export class TaskCard extends Component {
                   <span>
                     {capitalize(taskName)}
                   </span>
-                  <span className='btn' onClick={this.onClickEdit}>
-                    <i className='far fa-edit'/>
-                  </span>
+                  <div className='action-btns'>
+
+
+                    <span className='btn' onClick={this.onClickEdit}>
+                      <i className='far fa-edit'/>
+                    </span>
+                    <span className='btn' onClick={this.onClickDelete}>
+                      <i className='fas fa-trash'/>
+                    </span>
+                  </div>
                 </Fragment>
             }
           </div>

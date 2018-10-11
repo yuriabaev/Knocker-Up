@@ -1,6 +1,5 @@
 import moment from 'moment'
 import { observable, action, computed } from 'mobx'
-import TasksList from '../components/TasksList/TasksList'
 
 const uuidv4 = require('uuid/v4')
 
