@@ -2,6 +2,7 @@
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://yuriabaev.github.io/Knocker-Up/",
   "dependencies": {
     "@material-ui/core": "^1.5.0",
     "@material/card": "^0.38.1",
@@ -25,9 +26,12 @@
     "build-js": "react-app-rewired build",
     "build": "npm-run-all build-css build-js",
     "test": "react-app-rewired test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "devDependencies": {
+    "gh-pages": "^2.0.1",
     "react-app-rewired": "^1.5.2"
   }
 }
