@@ -32,6 +32,7 @@
   },
   "devDependencies": {
     "gh-pages": "^2.0.1",
-    "react-app-rewired": "^1.5.2"
+    "react-app-rewired": "^1.5.2",
+    "react-test-renderer": "^16.5.2"
   }
 }

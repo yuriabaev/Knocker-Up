@@ -5,3 +5,5 @@
   * add google calendar integration
   
   add CircleCI
+  
+ ! add tests jest

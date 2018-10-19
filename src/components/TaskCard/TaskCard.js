@@ -132,7 +132,9 @@ export class TaskCard extends Component {
               <Button size='small' onClick={this.onClickDone}> Done </ Button>
 
           }
-          <TaskStatus dueDate={dueDate} notifyDuration={notifyDuration}/>
+          { (dueDate && notifyDuration) &&
+            <TaskStatus dueDate={dueDate} notifyDuration={notifyDuration}/>
+          }
         </CardActions>
       </Card>)
   }
