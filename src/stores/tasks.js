@@ -1,4 +1,6 @@
-import { Duration, Task, TIME } from '../businessLogic/types'
+import { Task, TIME } from '../businessLogic/types'
+import { Duration } from '../businessLogic/Types/Duration'
+
 import { observable, action } from 'mobx'
 
 class ObservableTasksStore {

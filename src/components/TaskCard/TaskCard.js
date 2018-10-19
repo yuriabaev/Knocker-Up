@@ -15,6 +15,7 @@ import { observer } from 'mobx-react'
 import { capitalize } from '../../utils/StringUtils'
 import { PeriodPicker } from './components/PeriodPicker'
 import TextareaAutosize from 'react-autosize-textarea'
+import TaskStatus from '../TaskStatusComponent/TaskStatus'
 
 const TIME_FORMAT = 'DD/MM/YY h:mm:ss a'
 
@@ -131,6 +132,7 @@ export class TaskCard extends Component {
               <Button size='small' onClick={this.onClickDone}> Done </ Button>
 
           }
+          <TaskStatus dueDate={dueDate} notifyDuration={notifyDuration}/>
         </CardActions>
       </Card>)
   }

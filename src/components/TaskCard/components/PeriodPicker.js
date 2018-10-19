@@ -1,9 +1,10 @@
 import { Fragment } from 'react'
 import TextField from '@material-ui/core/TextField'
 import Select from '@material-ui/core/Select'
-import { Duration, TIME } from '../../../businessLogic/types'
+import { TIME } from '../../../businessLogic/types'
 import MenuItem from '@material-ui/core/MenuItem'
 import React from 'react'
+import { Duration } from '../../../businessLogic/Types/Duration'
 
 export const PeriodPicker = ({isInEditMode, number, time, onChange}) => {
   const onNumberChange = (event) => {

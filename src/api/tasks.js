@@ -1,5 +1,5 @@
 import  taskStore  from '../stores/tasks'
-import { Duration, Task, TIME } from '../businessLogic/types'
+import { Task, TIME } from '../businessLogic/types'
 // const tasks = [
 //   Task(444, 'db:clean the car', 'with soap plz, it is really important', Duration(7, TIME.DAYS), Duration(6, TIME.MONTHS), '2018-08-17T10:02:18.674Z'),
 //   Task(555, 'db:check car wheels', '', Duration(2, TIME.DAYS), Duration(1, TIME.MONTHS)),

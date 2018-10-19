@@ -1,5 +1,6 @@
 import moment from 'moment'
 import { observable, action, computed } from 'mobx'
+import { Duration } from './Types/Duration'
 
 const uuidv4 = require('uuid/v4')
 
@@ -71,12 +72,6 @@ export class Task {
   @action
   setAlertDuration(duration){
     this.notifyDuration = duration
-  }
-}
-
-export const Duration = (number, time) => {
-  return {
-    number, time
   }
 }
 
