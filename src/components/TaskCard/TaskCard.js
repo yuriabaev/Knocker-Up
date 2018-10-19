@@ -86,11 +86,14 @@ export class TaskCard extends Component {
                               onChange={this.onDescriptionChange} disabled={!isInEditMode} value={description}/>
           </div>
           <div className={'footer'}>
-            {lastDone &&
+
+            {dueDate &&
             <div className={'footer-text'}>
-              <i className='fa fa-fast-backward'/> {lastDone.format(TIME_FORMAT)}
+              <i className='far fa-clock'/> {dueDate.format(TIME_FORMAT)}
             </div>
             }
+
+
             {recurringDuration &&
             <div className={'footer-text'}>
               <i className='fas fa-undo'/>
@@ -101,9 +104,9 @@ export class TaskCard extends Component {
             </div>
             }
 
-            {dueDate &&
+            {lastDone &&
             <div className={'footer-text'}>
-              <i className='far fa-clock'/> {dueDate.format(TIME_FORMAT)}
+              <i className='fa fa-fast-backward'/> {lastDone.format(TIME_FORMAT)}
             </div>
             }
 
@@ -125,14 +128,15 @@ export class TaskCard extends Component {
 
           </div>
         </div>
-        <CardActions>
+        <CardActions className={'actions-wrapper'}>
+
           {
             isInEditMode ?
               <Button size='small' onClick={this.onClickSave}> Save </ Button> :
               <Button size='small' onClick={this.onClickDone}> Done </ Button>
 
           }
-          { (dueDate && notifyDuration) &&
+          { ( dueDate && notifyDuration) &&
             <TaskStatus dueDate={dueDate} notifyDuration={notifyDuration}/>
           }
         </CardActions>
