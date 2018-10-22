@@ -6,4 +6,6 @@
   
   add CircleCI
   
- ! add tests jest
+ ! add tests jest- webstorm
+ add immutability state
+ 
